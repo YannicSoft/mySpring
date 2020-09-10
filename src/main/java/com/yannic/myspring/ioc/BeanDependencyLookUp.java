@@ -1,5 +1,6 @@
 package com.yannic.myspring.ioc;
 
+import com.yannic.myspring.ioc.annotation.Super;
 import com.yannic.myspring.ioc.model.User;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
@@ -18,6 +19,7 @@ public class BeanDependencyLookUp {
         lookUpByType(beanFactory);
         lookUpLazy(beanFactory);
         lookUpCollectionType(beanFactory);
+        lookUpWithAnnotation(beanFactory);
     }
 
     /**
@@ -51,11 +53,19 @@ public class BeanDependencyLookUp {
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
             Map<String, User> userMap = listableBeanFactory.getBeansOfType(User.class);
-            for (Map.Entry<String, User> entry : userMap.entrySet()) {
-                User user = entry.getValue();
-                System.out.println("集合查找" + user.toString());
-            }
+            System.out.println("集合查找" + userMap);
+        }
+    }
 
+    /**
+     * 注解查找
+     * @param beanFactory
+     */
+    private static void lookUpWithAnnotation(BeanFactory beanFactory) {
+        if (beanFactory instanceof ListableBeanFactory) {
+            ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
+            Map<String, Super> superMap = (Map)listableBeanFactory.getBeansWithAnnotation(Super.class);
+            System.out.println("注解查找" + superMap);
         }
     }
 }

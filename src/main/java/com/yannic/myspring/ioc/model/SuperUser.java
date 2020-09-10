@@ -1,5 +1,8 @@
 package com.yannic.myspring.ioc.model;
 
+import com.yannic.myspring.ioc.annotation.Super;
+
+@Super
 public class SuperUser extends User{
     private String address;
 
