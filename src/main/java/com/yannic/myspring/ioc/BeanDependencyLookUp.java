@@ -2,8 +2,11 @@ package com.yannic.myspring.ioc;
 
 import com.yannic.myspring.ioc.model.User;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.util.Map;
 
 /**
  * 依赖查找
@@ -41,8 +44,18 @@ public class BeanDependencyLookUp {
 
     /**
      * bean集合
+     *
      * @param beanFactory
      */
     private static void lookUpCollectionType(BeanFactory beanFactory) {
+        if (beanFactory instanceof ListableBeanFactory) {
+            ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
+            Map<String, User> userMap = listableBeanFactory.getBeansOfType(User.class);
+            for (Map.Entry<String, User> entry : userMap.entrySet()) {
+                User user = entry.getValue();
+                System.out.println("集合查找" + user.toString());
+            }
+
+        }
     }
 }
