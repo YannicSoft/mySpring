@@ -6,15 +6,18 @@ import java.util.Collection;
 
 /**
  * 用户仓库
+ * @author yannic
  */
 public class UserRepository {
-    private Collection<User> users;
 
-    public Collection<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(Collection<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
+
+    private User user;
+
 }

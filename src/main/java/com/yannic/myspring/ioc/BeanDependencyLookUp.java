@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * 依赖查找
+ * @author yannic
  */
 public class BeanDependencyLookUp {
     public static void main(String[] args) {
@@ -24,8 +25,6 @@ public class BeanDependencyLookUp {
 
     /**
      * 延迟查找
-     *
-     * @param beanFactory
      */
     private static void lookUpLazy(BeanFactory beanFactory) {
         ObjectFactory objectFactory = (ObjectFactory) beanFactory.getBean("objectFactory");
@@ -35,10 +34,8 @@ public class BeanDependencyLookUp {
 
     /**
      * 按类型查找
-     *
-     * @param beanFactory
      */
-    public static void lookUpByType(BeanFactory beanFactory) {
+    private static void lookUpByType(BeanFactory beanFactory) {
         User user = beanFactory.getBean(User.class);
         System.out.println("实时查找" + user.toString());
     }
@@ -46,8 +43,6 @@ public class BeanDependencyLookUp {
 
     /**
      * bean集合
-     *
-     * @param beanFactory
      */
     private static void lookUpCollectionType(BeanFactory beanFactory) {
         if (beanFactory instanceof ListableBeanFactory) {
@@ -59,12 +54,11 @@ public class BeanDependencyLookUp {
 
     /**
      * 注解查找
-     * @param beanFactory
      */
     private static void lookUpWithAnnotation(BeanFactory beanFactory) {
         if (beanFactory instanceof ListableBeanFactory) {
             ListableBeanFactory listableBeanFactory = (ListableBeanFactory) beanFactory;
-            Map<String, Super> superMap = (Map)listableBeanFactory.getBeansWithAnnotation(Super.class);
+            Map superMap = listableBeanFactory.getBeansWithAnnotation(Super.class);
             System.out.println("注解查找" + superMap);
         }
     }

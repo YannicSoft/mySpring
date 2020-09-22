@@ -8,13 +8,17 @@
     <import resource="beanLookUp.xml" />
 
     <!-- 手动配置  -->
-    <bean id="userRepository" class="com.yannic.myspring.ioc.repository.UserRepository">
-        <property name="users">
-            <util:list>
-                <ref bean="user" />
-                <ref bean="superUser" />
-            </util:list>
-        </property>
+<!--    <bean id="userRepository" class="com.yannic.myspring.ioc.repository.UserRepository">-->
+<!--        <property name="users">-->
+<!--            <util:list>-->
+<!--                <ref bean="user" />-->
+<!--                <ref bean="superUser" />-->
+<!--            </util:list>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <!-- 自动配置 -->
+    <bean id="userRepository" class="com.yannic.myspring.ioc.repository.UserRepository" autowire="byName">
     </bean>
 
 </beans>
